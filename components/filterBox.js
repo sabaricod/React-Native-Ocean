@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import CustomButton from './customButton'
 const {width, height} = Dimensions.get('window');
 
-
+// filterbox
 
 
 const FilterBox = ({ arrData,search,setSearch,setCheckBox}) => {
