@@ -8,25 +8,32 @@ import FilterBox from '../components/filterBox'
 
 const {width,height}= Dimensions.get("window")
 
-// first 
-
 const arrData=[
-    {label:'ID',value:'id',isChecked: false },
-    {label:'Staff Name',value:'staff_name',isChecked: false },
-    {label:'Qualification',value:'qualification',isChecked: false },
-    {label:'Email',value:'email',isChecked: false },
-    {label:'Phone Number',value:'phone',isChecked: false },
-    {label:'Profile Image',value:'profile_image',isChecked: false }
+    {label:'ID',value:'id',isChecked: false, wdt:0.2 },
+    {label:'Staff Name',value:'staff_name',isChecked: false, wdt:0.6 },
+    {label:'Qualification',value:'qualification',isChecked: false, wdt:0.6  },
+    {label:'Email',value:'email',isChecked: false, wdt:0.9 },
+    {label:'Phone Number',value:'phone',isChecked: false, wdt:0.6  },
+    {label:'Profile Image',value:'profile_image',isChecked: false, wdt:0.9}
 ]
 
 const ViewStaff = ({navigation}) =>{
    
     const {staffData,DelData,SetStaffData}=useContext(StaffContext)
     const [checkBox,setCheckBox]=useState(arrData)
-    const [search,SetSearch]=useState(null)
+    const [header,setHeader]=useState(arrData.map(item=>item.label))
+    const [headerKey,setHeaderKey]=useState(arrData.map(item=>item.value))
+    const [widthArr,setwidthArr]=useState(arrData.map(item=>item.wdt))
+
+    const gridHandler=()=>{
+        let varArr=checkBox.filter(item=>item.isChecked==true)
+        setHeader(varArr.length!=0?varArr.map(item=>item.label):checkBox.map(item=>item.label))
+        setHeaderKey(varArr.length!=0?varArr.map(item=>item.value):checkBox.map(item=>item.value))
+        setwidthArr(varArr.length!=0?varArr.length<2?varArr.map(item=>item.wdt>0.75?item.wdt:0.75):varArr.map(item=>item.wdt):checkBox.map(item=>item.wdt))
+    }
+   
     
-    
-    
+      
     return(
         <View style={Styles.container}>
         <View style={Styles.titleLayout}>
@@ -47,12 +54,13 @@ const ViewStaff = ({navigation}) =>{
          
          </View>
          <View style={{width:'90%',alignItems:'flex-end',paddingHorizontal:5}}>
-         <FilterBox arrData={checkBox} setCheckBox={setCheckBox} search={search} setSearch={SetSearch} />
+         <FilterBox arrData={checkBox} setCheckBox={setCheckBox} func={gridHandler} />
          </View>
          <Grid
-         headers={["id","staff_name", "email", "phone", "profile_image"]}
+         headers={header}
+         headerKey={headerKey}
+         widthArr={widthArr}
          tableData={staffData}
-         widthArr={[0.2,0.4,.8,.5,0.8]}
          DelData={DelData}
          title="ViewStaff"
          />

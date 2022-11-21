@@ -48,7 +48,7 @@ export default EditDeptModel = ({id}) => {
 
   return (
       <View style={{flex:1,width:"100%"}}> 
-      <ScrollView contentContainerStyle={{alignItems: 'center',padding:10}}>
+      <ScrollView contentContainerStyle={{alignItems: 'center',padding:10}}  showsVerticalScrollIndicator={false}>
       <Dropdown label="Choose" title="Course Name" wdt={0.7} data={courses} onSelect={selectCourseHandler} select={selectedCourse} />
       <Radiobutton PROP={section} wdt={0.7}label="No of Section" value={radiobutton} setValue={selectSection}/>
       <Dropdown label="Choose" title="Staff Name" wdt={0.7} data={data} onSelect={selectStaffHandler}  select={selectedStaff}/>

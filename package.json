@@ -1,5 +1,5 @@
 {
-  "name": "trial",
+  "name": "Demo",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-native-community/checkbox": "^0.5.12",
+    "@react-native-community/cli": "^9.3.2",
     "@react-native-community/datetimepicker": "^6.5.3",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/stack": "^6.3.3",

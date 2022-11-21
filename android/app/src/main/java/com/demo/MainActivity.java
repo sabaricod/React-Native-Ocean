@@ -1,4 +1,4 @@
-package com.trial;
+package com.demo;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;

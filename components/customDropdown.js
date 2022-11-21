@@ -56,6 +56,7 @@ const Dropdown = ({ label, data, onSelect ,title,select,wdt}) => {
               data={data}
               renderItem={renderItem}
               keyExtractor={(item, index) => index.toString()}
+              showsVerticalScrollIndicator={false}
             />
           </View>
         </Pressable>

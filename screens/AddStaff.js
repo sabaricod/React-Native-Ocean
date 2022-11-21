@@ -20,7 +20,7 @@ export default AddStaff = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={{alignItems: 'center'}}>
+    <ScrollView contentContainerStyle={{alignItems: 'center'}}  showsVerticalScrollIndicator={false}>
       <Text style={Styles.Title}>Add Staff Details</Text>
       <TextBox label="Staff Name" wdt={0.9} keyValue={'staff_name'} func={handleChange} value={values.staff_name}/>
       <TextBox label="Qualification" wdt={0.9} keyValue={'qualification'} func={handleChange} value={values.qualification}/>
@@ -34,6 +34,7 @@ export default AddStaff = () => {
         width={0.25*width}
         height={0.07*height}
         textcolor="#F4F4F4"
+        size={16}
         func={()=>{setPostData(values);setValues(initialState)}}
        />
         <CustomButton
@@ -43,6 +44,7 @@ export default AddStaff = () => {
         width={0.25*width}
         height={0.07*height}
         textcolor="#59758b"
+        size={16}
         func={()=>setValues(initialState)}
         />  
       </View>

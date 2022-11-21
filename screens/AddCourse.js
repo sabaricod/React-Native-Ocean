@@ -46,7 +46,7 @@ export default AddCourse = () => {
   }
 
   return (
-    <ScrollView contentContainerStyle={{alignItems: 'center'}}>
+    <ScrollView contentContainerStyle={{alignItems: 'center'}}  showsVerticalScrollIndicator={false}>
       <Text style={Styles.Title}>Add Department Details</Text>
       <Dropdown label="Choose" wdt={0.9} title="Course Name" data={courses} onSelect={selectCourseHandler} select={selectedCourse} />
       <Radiobutton PROP={section} wdt={0.9} label="No of Section" value={radiobutton} setValue={selectSection}/>
@@ -62,6 +62,7 @@ export default AddCourse = () => {
         width={0.25*width}
         height={0.07*height}
         textcolor="#F4F4F4"
+        size={16}
         func={()=>setPostDeptData(values)}
        />
         <CustomButton
@@ -71,6 +72,7 @@ export default AddCourse = () => {
         width={0.25*width}
         height={0.07*height}
         textcolor="#59758b"
+        size={16}
         func={()=>{
         setCourse(undefined);
         setStaff('');

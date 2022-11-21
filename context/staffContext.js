@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect,useRef } from "react";
 
+
 // create context
 const StaffContext = createContext();
 
@@ -9,7 +10,13 @@ const StaffContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchStaff = () => {
       fetch("https://620502d5161670001741b2f7.mockapi.io/staff/staff").then((response) => response.json()).then(item=>SetStaffData(item))
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      if(error=="TypeError: Network request failed"){
+        if(error=="TypeError: Network request failed"){
+          fetchStaff()        
+      }
+      }
+    });
     }
  
     fetchStaff();
@@ -26,7 +33,7 @@ const StaffContextProvider = ({ children }) => {
       headers: {
           "Content-type": "application/json; charset=UTF-8"
       }
-    }).then(response => response.json()).then(json => console.log(json));
+    }).then(response => response.json())
 
     
       }
@@ -44,7 +51,7 @@ const StaffContextProvider = ({ children }) => {
           headers: {
               "Content-type": "application/json; charset=UTF-8"
           }
-        }).then(response => response.json()).then(json => console.log(json));
+        }).then(response => response.json())
     
         
           }

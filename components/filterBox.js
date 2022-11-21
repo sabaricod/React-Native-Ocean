@@ -15,14 +15,13 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import CustomButton from './customButton'
 const {width, height} = Dimensions.get('window');
 
-// filterbox
 
-
-const FilterBox = ({ arrData,search,setSearch,setCheckBox}) => {
+const FilterBox = ({ arrData,setCheckBox,func}) => {
   const DropdownButton = useRef();
+  
   const [visible, setVisible] = useState(false);
   const [dropdownTop, setDropdownTop] = useState(0);
-
+  const [search,SetSearch]=useState(null)
   const toggleDropdown = () => {
     visible ? setVisible(false) : openDropdown();
   };
@@ -62,10 +61,12 @@ const FilterBox = ({ arrData,search,setSearch,setCheckBox}) => {
             placeholder="Search here"
             value={search}
             onChangeText={
-              (text)=>setSearch(text)
+              (text)=>{
+                SetSearch(text);
+              }
             }/>
           </View>
-          <View style={{width:'90%',height:'40%',marginBottom:10,flexDirection:'row',flexWrap:'wrap',justifyContent:'space-evenly'}}>
+          <View style={{width:'90%',marginBottom:10,flexDirection:'row',flexWrap:'wrap',justifyContent:'space-evenly'}}>
            {
            arrData.map((res,index)=>{
              return(
@@ -77,6 +78,7 @@ const FilterBox = ({ arrData,search,setSearch,setCheckBox}) => {
            })
            }
           </View>
+          <View style={{marginBottom:20}}>
           <CustomButton
          Label="filter"
          size={14}
@@ -85,7 +87,9 @@ const FilterBox = ({ arrData,search,setSearch,setCheckBox}) => {
          width={0.25*width}
          height={0.05*height}
          textcolor="#F4F4F4"
+         func={()=>{func();setVisible(false)}}
          />
+         </View>
           </View>
         </Pressable>
       </Modal>
@@ -129,7 +133,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor:'#f4f4f4',
     width:0.9*width,
-    height:0.40*height,
     shadowColor: '#000000',
     shadowRadius: 4,
     shadowOffset: { height: 4, width: 0 },

@@ -5,14 +5,17 @@ import RenderModal from '../modal_options/RenderModal'
 import CustomButton from '../components/customButton';
 import EditStaffModel from '../modal_options/EditStaffModel'
 import EditDeptModel from  '../modal_options/EditDeptModel'
+import EditStudentModel from '../modal_options/EditStudentModel'
 
 const {width, height} = Dimensions.get('window');
 let index = 0;
 
-const Grid = ({headers, tableData, widthArr, DelData,title}) => {
+const Grid = ({headers,headerKey,widthArr, tableData, DelData,title}) => {
+
   const Data = {
-    Header: headers,
-    widthArr: widthArr,
+    Header:headers ,
+    HeaderKey:headerKey,
+    widthArr:widthArr
   };
 
   
@@ -37,6 +40,7 @@ const Grid = ({headers, tableData, widthArr, DelData,title}) => {
     uniqcode,
     datarendered,
     index,
+    first,
     checkbox,
   }) => {
     const [visible, setVisible] = useState(false);
@@ -45,7 +49,7 @@ const Grid = ({headers, tableData, widthArr, DelData,title}) => {
       <View
         style={{
           ...viewstyles,
-          width: Data.widthArr[index] * width,
+          width: first?0.2*width:Data.widthArr[index] * width,
           borderRightWidth: 0.4,
           justifyContent: 'center',
           alignItems: 'center',
@@ -53,7 +57,7 @@ const Grid = ({headers, tableData, widthArr, DelData,title}) => {
         key={uniqcode}
        >
         <RenderModal id={datarendered} visible={visible} setVisible={setVisible} DelData={DelData} >
-        {title=="ViewStaff"?<EditStaffModel id={datarendered}/>:title=="ViewCourse"?<EditDeptModel id={datarendered}/>:<Text>Student</Text>}
+        {title=="ViewStaff"?<EditStaffModel id={datarendered}/>:title=="ViewCourse"?<EditDeptModel id={datarendered}/>:<EditStudentModel id={datarendered}/>}
         </RenderModal>
         {checkbox ? (
           <CheckBox
@@ -68,7 +72,7 @@ const Grid = ({headers, tableData, widthArr, DelData,title}) => {
   };
 
   return (
-    <View style={{width: '95%',marginVertical: 10,elevation:10}}>
+    <View style={{width: '95%',marginVertical: 10}}>
      <View style={{borderRadius:20,overflow:'hidden'}}>
       <ScrollView horizontal bounces={false} showsHorizontalScrollIndicator={false}>
       
@@ -90,6 +94,7 @@ const Grid = ({headers, tableData, widthArr, DelData,title}) => {
                         fontWeight: '800',
                       }}
                       index={index}
+                      first
                     />
                     <Cell
                       viewstyles={{
@@ -133,7 +138,7 @@ const Grid = ({headers, tableData, widthArr, DelData,title}) => {
             {dataintable.map((eachrow, rowindex) => {
               let arr = [];
               Object.keys(eachrow).map((val, index) => {
-                let matchindex = Data.Header.findIndex(
+                let matchindex = Data.HeaderKey.findIndex(
                   element => element == val,
                 );
                 arr[matchindex] = eachrow[val];
@@ -144,7 +149,7 @@ const Grid = ({headers, tableData, widthArr, DelData,title}) => {
                   style={{
                     flexDirection: 'row',
                     height: 0.2 * height,
-                    backgroundColor: 'red',
+                   
                   }}
                   key={rowindex}>
                   {arr.map((item, index) => {
@@ -162,7 +167,7 @@ const Grid = ({headers, tableData, widthArr, DelData,title}) => {
                             }}
                             datarendered={item}
                             uniqcode={'sltrow' + rowindex + index}
-                            
+                            first
                             index={index}
                             checkbox
                           />
@@ -209,17 +214,18 @@ const Grid = ({headers, tableData, widthArr, DelData,title}) => {
         </View>
       </ScrollView>
       </View>
+      <Text style={{width:'100%',textAlign:'center',color:'#59758b',fontSize:16,fontWeight:'600',marginVertical:0.04*height}}>{`Showing ${tableData.length!=0?index+1:0} to ${tableData.length<index+2?tableData.length:index+2} of ${tableData.length} entries`}</Text>
       <View
         style={{
           width: 0.9 * width,
           flexDirection: 'row',
           height: 0.15 * height,
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'space-evenly',
         }}>
         <CustomButton
           Label="Previous"
-          size={18}
+          size={16}
           ripplecolor="#2d3b46"
           color="#59758b"
           width={0.30 * width}
@@ -229,7 +235,7 @@ const Grid = ({headers, tableData, widthArr, DelData,title}) => {
         />
         <CustomButton
           Label="Next"
-          size={18}
+          size={16}
           ripplecolor="#2d3b46"
           color="#59758b"
           width={0.30 * width}

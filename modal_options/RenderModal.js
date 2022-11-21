@@ -29,6 +29,7 @@ const RenderModal = ({id,visible,setVisible,DelData,children}) => {
             width={0.4*width}
             height={0.1*height}
             textcolor="#F4F4F4"
+            size={16}
             func={()=>DelData(id)}/>
             <CustomButton
             Label="Edit"
@@ -37,6 +38,7 @@ const RenderModal = ({id,visible,setVisible,DelData,children}) => {
             width={0.4*width}
             height={0.1*height}
             textcolor="#F4F4F4"
+            size={16}
             func={()=>setSwitch(false)}/>
             </View>:
            

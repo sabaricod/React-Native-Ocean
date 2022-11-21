@@ -20,7 +20,7 @@ export default EditStaffModel = ({id}) => {
 
   return (
     <View style={{flex:1,width:"100%"}}> 
-    <ScrollView contentContainerStyle={{alignItems: 'center',padding:10}}>
+    <ScrollView contentContainerStyle={{alignItems: 'center',padding:10}}  showsVerticalScrollIndicator={false}>
       <TextBox label="Staff Name" wdt={0.70} keyValue={'staff_name'} func={handleChange} value={values.staff_name}/>
       <TextBox label="Qualification" wdt={0.70} keyValue={'qualification'} func={handleChange} value={values.qualification}/>
       <TextBox label="Email" wdt={0.70} keyValue={'email'} func={handleChange} value={values.email}/>

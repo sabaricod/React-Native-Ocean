@@ -1,8 +1,9 @@
 import {View, Text, StyleSheet, Pressable, Dimensions} from 'react-native';
 import React, {useState} from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import Icon from 'react-native-vector-icons/FontAwesome5'
 const {width, height} = Dimensions.get('window');
-export default DateInput = ({label}) => {
+export default DateInput = ({label,selectDate,wdt}) => {
   const [show, setDatePicker] = useState(false);
   const [date, setDate] = useState(new Date());
   function showDatePicker() {
@@ -12,9 +13,11 @@ export default DateInput = ({label}) => {
     setDatePicker(false);
     if (event?.type === 'dismissed') {
       setDate(date);
+      selectDate(date)
       return;
     }
     setDate(selectedDate);
+    selectDate(selectedDate)
   }
 
   return (
@@ -27,11 +30,12 @@ export default DateInput = ({label}) => {
           style={Styles.datePicker}
         />
       )}
-      <View style={{width: 0.9 * width, marginVertical: 10}}>
+      <View style={{width: wdt * width, marginVertical: 10}}>
         <Text style={Styles.Label}>{label}</Text>
         <Pressable onPress={showDatePicker}>
           <View style={Styles.DateContainer}>
-            <Text>{date.toDateString()}</Text>
+            <Text style={{size:16}}>{date.toDateString()}</Text>
+            <Icon name='calendar' size={20} color="#59758b"/>
           </View>
         </Pressable>
       </View>
@@ -53,5 +57,9 @@ const Styles = StyleSheet.create({
     backgroundColor: '#f4f4f4',
     elevation: 5,
     justifyContent: 'center',
+    paddingHorizontal:10,
+    justifyContent:'space-between',
+    flexDirection:'row',
+    alignItems:'center'
   },
 });

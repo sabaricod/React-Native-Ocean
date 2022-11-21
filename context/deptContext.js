@@ -9,7 +9,11 @@ const DeptContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchDept =async () => {
      await fetch("https://620502d5161670001741b2f7.mockapi.io/staff/department").then((response) => response.json()).then(item=>SetDeptData(item))
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      if(error=="TypeError: Network request failed"){
+        fetchDept()        
+      }
+    });
     }
 
     fetchDept();
@@ -27,7 +31,7 @@ const DeptContextProvider = ({ children }) => {
       headers: {
           "Content-type": "application/json; charset=UTF-8"
       }
-    }).then(response => response.json()).then(json => console.log(json));
+    }).then(response => response.json())
       }
 
 
@@ -44,7 +48,7 @@ const DeptContextProvider = ({ children }) => {
           headers: {
               "Content-type": "application/json; charset=UTF-8"
           }
-        }).then(response => response.json()).then(json => console.log(json));
+        }).then(response => response.json())
     
         
           }
